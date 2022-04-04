@@ -11,15 +11,15 @@ export const SimpleForm = () => {
   const {name, email} = formState
 
   useEffect(() => {
-    console.log('Hey!')
+    // console.log('Hey!')
   }, [])
 
   useEffect(() => {
-    console.log('The formState changed!')
+    // console.log('The formState changed!')
   }, [formState])
 
   useEffect(() => {
-    console.log('The email changed!')
+    // console.log('The email changed!')
   }, [email])
 
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
