@@ -8,6 +8,9 @@ export const useFetch = (url: string) => {
 
   useEffect(() => {
 
+    setState({ data: null, loading: true, error: null })
+
+
     axios(url).then((resp => resp.data))
       .then(data => {
         setState({
