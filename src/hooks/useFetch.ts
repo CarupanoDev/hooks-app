@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import axios from "axios"
 
 export const useFetch = (url: string) => {
 
+  const isMounted = useRef(true)
 
   const [state, setState] = useState({ data: null, loading: true, error: null })
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
 
   useEffect(() => {
 
@@ -13,11 +20,21 @@ export const useFetch = (url: string) => {
 
     axios(url).then((resp => resp.data))
       .then(data => {
-        setState({
-          loading: false,
-          error: null,
-          data
-        })
+        setTimeout(() => {
+
+          if (isMounted.current) {
+            setState({
+              loading: false,
+              error: null,
+              data
+            })
+          } else{
+            console.log('setState was not called')
+          }
+
+
+        }, 4000)
+
       })
 
   }, [url])
